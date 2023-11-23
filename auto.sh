@@ -2,6 +2,7 @@
 
 # Set your Bitcoin ABC directory
 ABC_DIR="${1:-/root}"
+USER="${2:-root}"
 
 # Get the latest version from URL
 LATEST_VER=$(curl -Ls https://download.bitcoinabc.org/latest | grep -oP 'fabien-sha256sums\.\K[0-9]+\.[0-9]+\.[0-9]+(?=\.asc)' | head -n 1)
@@ -46,7 +47,7 @@ After=network.target
 [Service]
 ExecStartPre=/bin/bash -c 'mv /root/.bitcoin/debug.log /root/.bitcoin/debug_$(date +%%Y%%m%%d%%H%%M%%S).log'
 ExecStart=/root/bitcoin-abc-$LATEST_VER/bin/bitcoind -conf=/root/.bitcoin/bitcoin.conf -pid=/root/.bitcoin/bitcoind.pid
-User=root
+User=$USER
 Type=forking
 PIDFile=/root/.bitcoin/bitcoind.pid
 Restart=unless-stopped
@@ -73,7 +74,7 @@ if [[ "$LATEST_VER" != "$CURRENT_VER" ]]; then
     rm -f bitcoin-abc-$LATEST_VER-x86_64-linux-gnu.tar.gz
 
     echo "Starting new version of node"
-   ./bitcoin-abc-$LATEST_VER/bin/bitcoind -daemon
+    ./bitcoin-abc-$LATEST_VER/bin/bitcoind -daemon
 else
     echo "Already at latest version"
 fi
