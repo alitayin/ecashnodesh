@@ -73,7 +73,7 @@ if [[ "$LATEST_VER" != "$CURRENT_VER" ]]; then
     rm -f bitcoin-abc-$LATEST_VER-x86_64-linux-gnu.tar.gz
 
     echo "Starting new version of node"
-    $ABC_DIR/bitcoin-abc-$LATEST_VER/bin/bitcoind -daemon
+   ./bitcoin-abc-$LATEST_VER/bin/bitcoind -daemon
 else
     echo "Already at latest version"
 fi
