@@ -20,6 +20,8 @@ bash auto.sh "/ecashnode" "root"
 
 Please ensure you replace `"/ecashnode"` and `"root"` with your specific details before executing the script.
 
+This is beta for testing. If you wish to run this script on a schedule, you will need tools like cron. This is in the to-do list.
+
 
 ## License
 
